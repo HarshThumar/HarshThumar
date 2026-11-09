@@ -67,9 +67,9 @@
 ### Tools
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=python,ts,fastapi,react,nextjs,postgres,redis,gcp,firebase,terraform,docker,githubactions,linux&theme=dark&perline=13">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=python,ts,fastapi,react,nextjs,postgres,redis,gcp,firebase,terraform,docker,githubactions,linux&theme=light&perline=13">
-  <img alt="Python, TypeScript, FastAPI, React, Next.js, PostgreSQL, Redis, GCP, Firebase, Terraform, Docker, GitHub Actions, Linux" src="https://skillicons.dev/icons?i=python,ts,fastapi,react,nextjs,postgres,redis,gcp,firebase,terraform,docker,githubactions,linux&theme=light&perline=13">
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=python%2Cts%2Cfastapi%2Creact%2Cnextjs%2Cpostgres%2Credis%2Cgcp%2Cfirebase%2Cterraform%2Cdocker%2Cgithubactions%2Clinux&theme=dark&perline=13">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=python%2Cts%2Cfastapi%2Creact%2Cnextjs%2Cpostgres%2Credis%2Cgcp%2Cfirebase%2Cterraform%2Cdocker%2Cgithubactions%2Clinux&theme=light&perline=13">
+  <img alt="Python, TypeScript, FastAPI, React, Next.js, PostgreSQL, Redis, GCP, Firebase, Terraform, Docker, GitHub Actions, Linux" src="https://skillicons.dev/icons?i=python%2Cts%2Cfastapi%2Creact%2Cnextjs%2Cpostgres%2Credis%2Cgcp%2Cfirebase%2Cterraform%2Cdocker%2Cgithubactions%2Clinux&theme=light&perline=13">
 </picture>
 
 Also: LangGraph · CrewAI · Vertex AI / Gemini · Docling · Tamarin prover · OAuth 2.1 / OIDC
