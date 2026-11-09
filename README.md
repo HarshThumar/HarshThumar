@@ -1,6 +1,6 @@
 # Harsh Thumar
 
-**I build AI systems that sit close to money and personal data. Underneath that work is one question: how do you let an AI agent act for someone without handing it the keys?**
+**Building and breaking authorization for AI agents. I ship production LLM and data systems in Indian fintech, and I formally model how MCP agents get their credentials.**
 
 Founding engineer at an Indian credit-fintech startup · Ahmedabad, India
 Focus: **agent identity and delegated authorization** (OAuth 2.1, token exchange, WIMSE) and **MCP security**
@@ -33,9 +33,9 @@ The code below is private (employer and client work), so this section describes 
 <br>
 
 - **Compliant content engine.** It writes financial posts and messages in 4 Indian languages from a fact pack. A deterministic checker re-extracts every number from the output and blocks any number that isn't in the source. A versioned rule engine checks the text, then an LLM reviewer. A spend cap and an audit trail are on throughout.
-- **Multi-agent application evaluator.** CrewAI agents draft a scoring rubric and a human approves it. The agents then use retrieval over applicants' documents to score each one, with a justification for every criterion. Runs on Cloud Run and Cloud Tasks, with LangSmith tracing.
+- **Multi-agent application evaluator (built end to end as the sole engineer).** CrewAI agents draft a scoring rubric and a human approves it. The agents then use retrieval over applicants' documents to score each one, with a justification for every criterion. Runs on Cloud Run and Cloud Tasks, with LangSmith tracing.
 - **Document AI for project finance.** It extracts facts from PDF, DOCX and XLSX deal documents and reconciles conflicts between sources. It then drafts memoranda in which each citation points to a bounding box in the source document.
-- **Real-time computer-vision edge box (team project).** I built the scoring, highlights, analytics and live-broadcast overlay layers on top of a YOLO + pose-estimation pipeline. I also packaged the GPU deployment in containers, and found a container setting that had been silently forcing inference onto the CPU.
+- **Real-time computer-vision edge box (team project).** I helped label data for and train the detection model. On top of the YOLO + pose-estimation pipeline, I built camera setup and pitch calibration (homography), match scoring and the post-match flow, highlights, analytics, and the live-broadcast overlay. I also packaged the GPU deployment in containers, and found a container setting that had been silently forcing inference onto the CPU.
 - **Infrastructure.** I wrote Terraform for GCP: Cloud Run, private Cloud SQL, Secret Manager, Cloud Tasks, monitoring and Workload Identity Federation. I also built a cloud-agnostic backend template (AWS / Azure / GCP) with MFA, scoped JWTs and field-level encryption built in.
 
 </details>
@@ -44,6 +44,11 @@ The code below is private (employer and client work), so this section describes 
 
 - **[zero-cost-gaia-agent](https://github.com/HarshThumar/zero-cost-gaia-agent)**: a LangGraph research agent that scored **90% (18/20) on GAIA Level 1** with **$0** spent on models (free-tier Cloudflare Workers AI). It repairs malformed tool calls and takes a majority vote over 3 runs.
 - **[BillExtraction](https://github.com/HarshThumar/BillExtraction)**: turns invoice PDFs into Google Sheets rows (Docling + FastAPI on Cloud Run). It uses keyless service-account impersonation, so there is no long-lived JSON key.
+
+### Side projects
+
+- **[Sports-ground booking marketplace](https://booking-sable-iota.vercel.app)** (Next.js, Supabase, Razorpay). Players book slots, ground owners manage revenue. A row-locking Postgres function makes double booking impossible, and Gemini turns natural-language search ("pickleball in Mumbai") into filters.
+- **Café websites (unsolicited spec designs)**: [a specialty coffee bar](https://komo-by-kaffa-self.vercel.app) and [a vegetarian café](https://pepito-bice-beta.vercel.app). Scroll-driven 3D sites built with Astro, GSAP and three.js, with AI-generated menu photography. One menu has 227 dishes, each with its own photo. Lighthouse scores 100 for accessibility, best practices and SEO.
 
 ### Tools
 
