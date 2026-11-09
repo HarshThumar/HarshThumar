@@ -1,61 +1,77 @@
-# Harsh Thumar
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HarshThumar/HarshThumar/main/assets/header-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/HarshThumar/HarshThumar/main/assets/header-light.svg">
+  <img alt="Harsh Thumar: founding engineer working on agent identity, delegated authorization and MCP security" src="https://raw.githubusercontent.com/HarshThumar/HarshThumar/main/assets/header-light.svg" width="100%">
+</picture>
 
-**Building and breaking authorization for AI agents. I ship production LLM and data systems in Indian fintech, and I formally model how MCP agents get their credentials.**
+<p align="center">
+  <a href="https://www.linkedin.com/in/harsh-thumar-357037251/"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-Harsh%20Thumar-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
+  <a href="mailto:harshthummar1000@gmail.com"><img alt="Email" src="https://img.shields.io/badge/Email-harshthummar1000%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white"></a>
+  <a href="https://github.com/HarshThumar/mcp-auth-tamarin"><img alt="Tamarin model" src="https://img.shields.io/badge/Tamarin-MCP%20auth%20model-7EE787?style=for-the-badge&logo=github&logoColor=black"></a>
+</p>
 
-Founding engineer at an Indian credit-fintech startup · Ahmedabad, India
-Focus: **agent identity and delegated authorization** (OAuth 2.1, token exchange, WIMSE) and **MCP security**
+**Building and breaking authorization for AI agents.** I ship production LLM and data systems in Indian fintech, and I formally model how MCP agents get their credentials.
 
 ---
 
-### Now
+### Now: a formal model of MCP authorization
 
-- **[mcp-auth-tamarin](https://github.com/HarshThumar/mcp-auth-tamarin)**: a formal model of MCP authorization in the Tamarin prover, built for the IETF 127 Hackathon (remote).
-  - Model 01 asks one question: can an untrusted MCP server get a client to send its credentials to the wrong authorization server? The model rediscovers a published, already-fixed MCP SDK advisory on its own ([GHSA-qx49-fqc8-xw99](https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-qx49-fqc8-xw99)).
-  - In the vulnerable variant Tamarin finds the attack. With the fix applied, the property is proven. CI runs the proofs on every push.
-  - Next: PKCE, resource indicators (RFC 8707) and issuer identification (RFC 9207), then client ID metadata documents and enterprise token exchange (ID-JAG).
-- Remote participant in the IETF **OAuth** and **WIMSE** working groups; following the AAIF Identity & Trust WG.
+[**mcp-auth-tamarin**](https://github.com/HarshThumar/mcp-auth-tamarin) [![tamarin](https://github.com/HarshThumar/mcp-auth-tamarin/actions/workflows/tamarin.yml/badge.svg)](https://github.com/HarshThumar/mcp-auth-tamarin/actions/workflows/tamarin.yml) is my IETF 127 Hackathon project (remote).
+
+- **The question:** can an untrusted MCP server get an agent to send its credentials to the wrong authorization server?
+- **Model 01:** the model rediscovers a published, already-fixed MCP SDK advisory on its own ([GHSA-qx49-fqc8-xw99](https://github.com/modelcontextprotocol/python-sdk/security/advisories/GHSA-qx49-fqc8-xw99)). With the bug, Tamarin finds the attack. With the fix, the property is proven. CI checks it on every push.
+- **Next:** PKCE, RFC 8707 audiences and RFC 9207 issuer checks, then CIMD and ID-JAG enterprise token exchange.
+- **Community:** remote participant in the IETF **OAuth** and **WIMSE** working groups; following the AAIF Identity & Trust WG.
+
+### How I build AI that touches money
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HarshThumar/HarshThumar/main/assets/rule-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/HarshThumar/HarshThumar/main/assets/rule-light.svg">
+  <img alt="The model proposes, deterministic code decides, a human signs off, and everything is logged" src="https://raw.githubusercontent.com/HarshThumar/HarshThumar/main/assets/rule-light.svg" width="100%">
+</picture>
 
 ### Production work
 
-The rule I build by: **the model recommends, deterministic code decides, and a human signs off on anything that matters.**
+> [!NOTE]
+> This is employer and client work, so the code is private. I'm happy to walk through any of the designs.
 
-The code below is private (employer and client work), so this section describes what I built. I'm happy to walk through the designs.
-
-| What I built | How it is kept safe and correct |
+| What I built | How it's kept safe and correct |
 |---|---|
-| **A credit-appraisal API and loan-origination backend for lenders.** It takes a borrower's bank-statement, GST and credit-bureau data plus the lender's own credit-policy PDF. It runs 30+ deterministic forensic checks, then an LLM drafts the appraisal memo, citing every finding to the exact clause or cell it came from. | <ul><li>Tenants are isolated with Postgres row-level security.</li><li>Personal data is encrypted field by field (AES-256-GCM) and stays searchable through blind indexes.</li><li>The audit log is hash-chained and append-only.</li><li>LLM calls are pinned to an India region.</li><li>585 tests.</li></ul> |
-| **An LLM analyst with a guarded SQL tool.** An agent answers research questions using 12 domain tools plus a read-only SQL tool. Every number in an answer has to come from a tool result. | <ul><li>Each query is parsed (sqlglot) and only a single SELECT is allowed, against a 25-table allow-list with a row limit.</li><li>It runs under a read-only DB role with a statement timeout.</li><li>Each user has a token quota.</li><li>A 30-question eval suite grades answers against live data.</li></ul> |
-| **A data platform for mutual-fund research.** I was the main engineer. Scrapers cover 55 fund houses and 10+ years of data: 7.7M holdings rows, 8.6M NAV rows and 64K source documents, each with recorded provenance. | <ul><li>Every fund house passes 7 quality gates, for example holdings summing to 100% ± 0.1% and no invented IDs.</li><li>Load testing found the bottleneck. The fix cut p95 latency from 27.5 s to 1.5 s and raised throughput 9×.</li><li>CI/CD has no stored keys (Workload Identity Federation).</li></ul> |
-| **An underwriting app for borrowers with informal income.** It covers 46 business types, with income methods rebuilt from a lender's Excel workbooks. | <ul><li>Golden tests check every method against the workbook's own figures.</li><li>Each number can be traced back to its source cell.</li><li>4-role access control.</li><li>The rules recommend; a credit manager signs off.</li><li>A server-side guard refuses to store personal data.</li></ul> |
+| 🏦 **Credit-appraisal API for lenders.** Takes bank-statement, GST and bureau data plus the lender's own policy PDF, runs 30+ forensic checks, then an LLM drafts the memo with every finding cited to its source clause or cell. | Postgres row-level security per tenant · AES-256-GCM field encryption with blind indexes · hash-chained audit log · LLM pinned to an India region · 585 tests |
+| 🤖 **LLM analyst with a guarded SQL tool.** 12 domain tools plus a read-only SQL tool. Every number in an answer must come from a tool result. | sqlglot allows a single SELECT only · 25-table allow-list · read-only DB role · statement timeout · per-user token quotas · 30-question eval suite |
+| 📊 **Mutual-fund data platform** (main engineer). Covers 55 fund houses and 10+ years: 7.7M holdings rows, 8.6M NAV rows and 64K source documents, each with recorded provenance. | 7 quality gates per fund house · p95 latency **27.5 s → 1.5 s**, **9×** throughput · keyless CI/CD (Workload Identity Federation) |
+| 🧾 **Underwriting app for borrowers with informal income.** 46 business-type income methods, rebuilt from a lender's Excel workbooks. | Golden tests against the workbook figures · every number traces back to its source cell · rules recommend, a credit manager signs off · guard that refuses to store personal data |
 
 <details>
 <summary><b>More production work</b></summary>
 <br>
 
-- **Compliant content engine.** It writes financial posts and messages in 4 Indian languages from a fact pack. A deterministic checker re-extracts every number from the output and blocks any number that isn't in the source. A versioned rule engine checks the text, then an LLM reviewer. A spend cap and an audit trail are on throughout.
-- **Multi-agent application evaluator (built end to end as the sole engineer).** CrewAI agents draft a scoring rubric and a human approves it. The agents then use retrieval over applicants' documents to score each one, with a justification for every criterion. Runs on Cloud Run and Cloud Tasks, with LangSmith tracing.
-- **Document AI for project finance.** It extracts facts from PDF, DOCX and XLSX deal documents and reconciles conflicts between sources. It then drafts memoranda in which each citation points to a bounding box in the source document.
-- **Real-time computer-vision edge box (team project).** I helped label data for and train the detection model. On top of the YOLO + pose-estimation pipeline, I built camera setup and pitch calibration (homography), match scoring and the post-match flow, highlights, analytics, and the live-broadcast overlay. I also packaged the GPU deployment in containers, and found a container setting that had been silently forcing inference onto the CPU.
-- **Infrastructure.** I wrote Terraform for GCP: Cloud Run, private Cloud SQL, Secret Manager, Cloud Tasks, monitoring and Workload Identity Federation. I also built a cloud-agnostic backend template (AWS / Azure / GCP) with MFA, scoped JWTs and field-level encryption built in.
+- **Compliant content engine.** Writes financial posts in 4 Indian languages from a fact pack. A deterministic checker blocks any number that isn't in the source, a versioned rule engine checks the text and then an LLM reviews it. Has a spend cap and an audit trail.
+- **Multi-agent application evaluator** (built end to end as the sole engineer). CrewAI agents draft a rubric for a human to approve, then retrieve from applicants' documents to score each one with a justification per criterion. Runs on Cloud Run and Cloud Tasks with LangSmith tracing.
+- **Document AI for project finance.** Extracts facts from PDF, DOCX and XLSX deal documents, reconciles conflicts between them, and drafts memoranda in which every citation points to a bounding box in the source.
+- **Real-time computer-vision edge box (team project).** I helped label data for and train the detection model. I built the camera setup and pitch calibration, scoring and the post-match flow, highlights, analytics and the live-broadcast overlay. I also containerized the GPU deployment, and found a container setting that was silently forcing inference onto the CPU.
+- **Infrastructure.** Terraform for GCP: Cloud Run, private Cloud SQL, Secret Manager, Cloud Tasks, monitoring and Workload Identity Federation. Also a cloud-agnostic backend template (AWS / Azure / GCP) with MFA, scoped JWTs and field encryption built in.
 
 </details>
 
-### Open source
+### Open source and side projects
 
-- **[zero-cost-gaia-agent](https://github.com/HarshThumar/zero-cost-gaia-agent)**: a LangGraph research agent that scored **90% (18/20) on GAIA Level 1** with **$0** spent on models (free-tier Cloudflare Workers AI). It repairs malformed tool calls and takes a majority vote over 3 runs.
-- **[BillExtraction](https://github.com/HarshThumar/BillExtraction)**: turns invoice PDFs into Google Sheets rows (Docling + FastAPI on Cloud Run). It uses keyless service-account impersonation, so there is no long-lived JSON key.
-
-### Side projects
-
-- **[Sports-ground booking marketplace](https://booking-sable-iota.vercel.app)** (Next.js, Supabase, Razorpay). Players book slots, ground owners manage revenue. A row-locking Postgres function makes double booking impossible, and Gemini turns natural-language search ("pickleball in Mumbai") into filters.
-- **Café websites (unsolicited spec designs)**: [a specialty coffee bar](https://komo-by-kaffa-self.vercel.app) and [a vegetarian café](https://pepito-bice-beta.vercel.app). Scroll-driven 3D sites built with Astro, GSAP and three.js, with AI-generated menu photography. One menu has 227 dishes, each with its own photo. Lighthouse scores 100 for accessibility, best practices and SEO.
+| | |
+|---|---|
+| 🧠 [**zero-cost-gaia-agent**](https://github.com/HarshThumar/zero-cost-gaia-agent) | A LangGraph research agent that scored **90% (18/20) on GAIA Level 1** with **$0** spent on models. It repairs malformed tool calls and takes a majority vote over 3 runs |
+| 🧾 [**BillExtraction**](https://github.com/HarshThumar/BillExtraction) | Turns invoice PDFs into Google Sheets rows (Docling + FastAPI on Cloud Run), with keyless service-account impersonation |
+| 🏏 [**Ground booking marketplace**](https://booking-sable-iota.vercel.app) | Next.js, Supabase and Razorpay. A row-locked Postgres function makes double booking impossible, and Gemini handles natural-language search |
+| ☕ [**Café**](https://komo-by-kaffa-self.vercel.app) and [**café**](https://pepito-bice-beta.vercel.app) **sites** | Unsolicited spec designs: scroll-driven 3D sites built with Astro, GSAP and three.js, with AI menu photography. Lighthouse scores 100 for accessibility, best practices and SEO |
 
 ### Tools
 
-Python · TypeScript · FastAPI · React / Next.js · PostgreSQL · GCP (Cloud Run, Cloud SQL, Vertex AI) · Terraform · Docker · LangGraph · CrewAI · Tamarin
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=python,ts,fastapi,react,nextjs,postgres,redis,gcp,firebase,terraform,docker,githubactions,linux&theme=dark&perline=13">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=python,ts,fastapi,react,nextjs,postgres,redis,gcp,firebase,terraform,docker,githubactions,linux&theme=light&perline=13">
+  <img alt="Python, TypeScript, FastAPI, React, Next.js, PostgreSQL, Redis, GCP, Firebase, Terraform, Docker, GitHub Actions, Linux" src="https://skillicons.dev/icons?i=python,ts,fastapi,react,nextjs,postgres,redis,gcp,firebase,terraform,docker,githubactions,linux&theme=light&perline=13">
+</picture>
 
-### Contact
+Also: LangGraph · CrewAI · Vertex AI / Gemini · Docling · Tamarin prover · OAuth 2.1 / OIDC
 
-[LinkedIn](https://www.linkedin.com/in/harsh-thumar-357037251/) · harshthummar1000@gmail.com
-
-If you work on agent authorization, MCP security or OAuth for agents, I'd like to hear from you.
+<sub>If you work on agent authorization, MCP security or OAuth for agents, I'd like to hear from you.</sub>

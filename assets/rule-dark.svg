@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="150" viewBox="0 0 860 150" role="img" aria-label="How I build AI near money: the model proposes, deterministic code decides, a human signs off, and everything is logged">
+<style>
+text{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.n{font-size:12px} .h{font-size:14px;font-weight:700;letter-spacing:1.5px}
+.v{font-size:18px;font-weight:600} .s{font-size:12.5px}
+.b{animation:in .5s ease-out both}
+.flow{stroke-dasharray:4 5;animation:dash 1.2s linear infinite}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes dash{to{stroke-dashoffset:-18}}
+@media (prefers-reduced-motion:reduce){.b,.flow{animation:none}}
+</style>
+<g class="b" style="animation-delay:0.00s">
+<rect x="12" y="14" width="178" height="120" rx="10" fill="#161b22" stroke="#30363d"/>
+<rect x="12" y="14" width="4" height="120" rx="2" fill="#d2a8ff"/>
+<text x="30" y="40" class="n" fill="#8b949e">01</text>
+<text x="56" y="40" class="h" fill="#d2a8ff">MODEL</text>
+<text x="30" y="66" class="v" fill="#e6edf3">proposes</text>
+<text x="30" y="96" class="s" fill="#8b949e">LLM / agent drafts the</text>
+<text x="30" y="115" class="s" fill="#8b949e">answer or action</text>
+</g>
+<line x1="196" y1="74" x2="222" y2="74" stroke="#8b949e" stroke-width="2" class="flow"/><path d="M220 68 l8 6 -8 6" fill="none" stroke="#8b949e" stroke-width="2"/>
+<g class="b" style="animation-delay:0.25s">
+<rect x="230" y="14" width="178" height="120" rx="10" fill="#161b22" stroke="#30363d"/>
+<rect x="230" y="14" width="4" height="120" rx="2" fill="#79c0ff"/>
+<text x="248" y="40" class="n" fill="#8b949e">02</text>
+<text x="274" y="40" class="h" fill="#79c0ff">GUARD</text>
+<text x="248" y="66" class="v" fill="#e6edf3">decides</text>
+<text x="248" y="96" class="s" fill="#8b949e">rules, allow-lists,</text>
+<text x="248" y="115" class="s" fill="#8b949e">read-only DB roles</text>
+</g>
+<line x1="414" y1="74" x2="440" y2="74" stroke="#8b949e" stroke-width="2" class="flow"/><path d="M438 68 l8 6 -8 6" fill="none" stroke="#8b949e" stroke-width="2"/>
+<g class="b" style="animation-delay:0.50s">
+<rect x="448" y="14" width="178" height="120" rx="10" fill="#161b22" stroke="#30363d"/>
+<rect x="448" y="14" width="4" height="120" rx="2" fill="#e3b341"/>
+<text x="466" y="40" class="n" fill="#8b949e">03</text>
+<text x="492" y="40" class="h" fill="#e3b341">HUMAN</text>
+<text x="466" y="66" class="v" fill="#e6edf3">signs off</text>
+<text x="466" y="96" class="s" fill="#8b949e">anything that moves</text>
+<text x="466" y="115" class="s" fill="#8b949e">money or credit</text>
+</g>
+<line x1="632" y1="74" x2="658" y2="74" stroke="#8b949e" stroke-width="2" class="flow"/><path d="M656 68 l8 6 -8 6" fill="none" stroke="#8b949e" stroke-width="2"/>
+<g class="b" style="animation-delay:0.75s">
+<rect x="666" y="14" width="178" height="120" rx="10" fill="#161b22" stroke="#30363d"/>
+<rect x="666" y="14" width="4" height="120" rx="2" fill="#7ee787"/>
+<text x="684" y="40" class="n" fill="#8b949e">04</text>
+<text x="710" y="40" class="h" fill="#7ee787">LOG</text>
+<text x="684" y="66" class="v" fill="#e6edf3">remembers</text>
+<text x="684" y="96" class="s" fill="#8b949e">append-only, hash-</text>
+<text x="684" y="115" class="s" fill="#8b949e">chained audit trail</text>
+</g>
+</svg>
